@@ -7,7 +7,6 @@ on:
 
 env:
   DOCKER_BACKEND_IMAGE: ${{ secrets.DOCKER_USERNAME }}/lms-backend
-  DOCKER_FRONTEND_IMAGE: ${{ secrets.DOCKER_USERNAME }}/lms-frontend
   REACT_APP_API_URL: http://${{ secrets.SERVER_IP }}
 
 jobs:
@@ -40,21 +39,6 @@ jobs:
             ${{ env.DOCKER_BACKEND_IMAGE }}:2.0.0
             ${{ env.DOCKER_BACKEND_IMAGE }}:${{ github.sha }}
           cache-from: type=registry,ref=${{ env.DOCKER_BACKEND_IMAGE }}:2.0.0
-          cache-to: type=inline
-
-      - name: Build and push frontend image
-        uses: docker/build-push-action@v5
-        with:
-          context: ./frontend-react
-          platforms: linux/amd64,linux/arm64
-          push: true
-          no-cache: true
-          build-args: |
-            REACT_APP_API_URL=${{ env.REACT_APP_API_URL }}
-          tags: |
-            ${{ env.DOCKER_FRONTEND_IMAGE }}:2.0.0
-            ${{ env.DOCKER_FRONTEND_IMAGE }}:${{ github.sha }}
-          cache-from: type=registry,ref=${{ env.DOCKER_FRONTEND_IMAGE }}:2.0.0
           cache-to: type=inline
 
   deploy:
