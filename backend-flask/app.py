@@ -100,7 +100,7 @@ def is_course_teacher(course_id: int, teacher_id: int) -> bool:
 @app.route('/', methods=['GET'])
 def first():
 
-    return jsonify({'message': 'Backend flask app running'}), 200
+    return jsonify({'message': 'app running'}), 200
 
 
 @app.route('/api', methods=['GET'])
