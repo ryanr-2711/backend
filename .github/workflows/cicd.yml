@@ -67,5 +67,5 @@ jobs:
           echo "Pulling new backend image..."
           sudo docker-compose pull backend-flask
           echo "Starting new backend container..."
-          sudo docker-compose up -d --force-recreate backend-flask
+          sudo docker-compose up -d --build --pull always --force-recreate
           echo "Backend deployment complete!"'
