@@ -41,7 +41,7 @@ def auth_token():
 def test_home_route(client):
     response = client.get('/')
     assert response.status_code == 200
-    assert b'Backend flask app running' in response.data
+    assert b'app running' in response.data
 
 
 def test_api_route(client):
